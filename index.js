@@ -26,21 +26,41 @@ const connection = mysql.createConnection({
 
 const asyncQuery = util.promisify(connection.query)
 
-function viewDepartments(){
+
+function start(){
     inquirer
     .prompt([{
-            type: 'input',
-            name: 'departmentName',
-            id: "What is the department name?"
+            type: 'list',
+            name: 'userChoice',
+            message: "What would like to do?",
+            choices: ["view all departments", "view all roles", "view all employees", "add a department", "add a role", "add an employee","update an employee role"]
         },
         
     ])
 
     .then(input => {
         console.log(input)
-        const newDepartment = new Department(input.departmetnName, input.managerId, input.email, input.managerOfficeNum)
-        allEmployees.push(newDepartment)
-        menu()
+        
+    })
+}
+function addDepartment(){
+    inquirer
+    .prompt([{
+            type: 'input',
+            name: 'departmentName',
+            message: "What is the department name?"
+        },
+        {
+            type: 'input',
+            name: 'departmentId',
+            message: "What is the department id?"
+        },
+        
+    ])
+
+    .then(input => {
+        console.log(input)
+        
     })
 }
 
@@ -51,11 +71,10 @@ function roles(){
 inquirer
     .prompt([{
             type: 'input',
-            id: 'engineerName',
+            id: 'roleName',
             title: 'What is the name of your engineer?',
-            salary: ,
-            department_id: ,
-
+            salary: 'What is the salary?' ,
+            department_id: 'What department do you work do they work in' ,
         },
         
     ])
@@ -71,11 +90,11 @@ function employee(){
 inquirer
     .prompt([{
             type: 'input',
-            id: 'internName',
-            first_name: 'What is the name of your intern?',
-            last_name_: 
-            role_id:
-            manager_id:
+            id: 'employeeName',
+            first_name: 'What is the first name of employee?',
+            last_name_:  'What is the last name of employee?'
+            role_id:'What is their role id?'
+            manager_id: 'who is their manager?'
             employee (null if employee has no manager),
         },
         
